@@ -1,0 +1,17 @@
+{
+  "name": "deplegando-js",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "RedDeadth <mimamamemima335@gmail.com>",
+  "license": "MIT",
+  "private": false,
+
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "devDependencies": {
+    "dotenv": "^16.5.0",
+    "nodemon": "^3.1.10"
+  }
+}
