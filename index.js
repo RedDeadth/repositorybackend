@@ -1,14 +1,26 @@
-require('dotenv').config()
-const http = require('http')
+const http = require('http');
+const fs = require('fs');
+const path = require('path');
 
-function requestController() {
-    console.log('Bienvenidos al curso')
-}
+const server = http.createServer((req, res) => {
+    if (req.url === '/' || req.url === '/index.html') {
+        fs.readFile(path.join(__dirname, 'views', 'index.html'), (err, content) => {
+            if (err) {
+                res.writeHead(500);
+                res.end('Error loading the page');
+                return;
+            }
+            res.writeHead(200, { 'Content-Type': 'text/html' });
+            res.end(content);
+        });
+    } else {
+        res.writeHead(404);
+        res.end('Page not found');
+    }
+});
 
-const server = http.createServer(requestController)
+const PORT = process.env.PORT || 3000;
 
-const PORT = process.env.PORT
-
-server.listen(PORT, function() {
-    console.log("Aplicación corriendo en: " + PORT)
-})
+server.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+});
